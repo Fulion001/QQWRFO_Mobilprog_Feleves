@@ -11,15 +11,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Label Text="Username" FontSize="32" HorizontalOptions="Center" Grid.Row="0"/>
         <Entry Grid.Row="1"/>
         <Label Text="Password" FontSize="32" HorizontalOptions="Center" Grid.Row="2"/>
         <Entry Grid.Row="3"/>
-        <Label Text="Birdth date" FontSize="32"  HorizontalOptions="Center" Grid.Row="4"/>
-        <DatePicker Grid.Row="5"/>
-        <Grid Grid.Row="6" ColumnSpacing="20">
+        <Grid Grid.Row="5" ColumnSpacing="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>

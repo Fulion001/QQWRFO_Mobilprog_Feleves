@@ -22,7 +22,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Text="Login" Grid.Column="0"/>
+                    <Button Text="Login" Grid.Column="0" />
                 <Button Text="Register" Grid.Column="1"/>
             </Grid>
         </Grid>

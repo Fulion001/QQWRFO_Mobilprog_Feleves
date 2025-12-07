@@ -5,6 +5,13 @@ using SQLite;
 
 namespace QQWRFO_Mobilprog_Feleves
 {
+    public interface IDatabaseService
+    {
+        Task<int> SaveUserAsync(User user);
+        Task<User> GetUserAsync(string username);
+        Task<List<User>> GetUsersAsync();
+        Task<int> DeleteUserAsync(User user);
+    }
     public class User
     {
         [PrimaryKey, AutoIncrement]

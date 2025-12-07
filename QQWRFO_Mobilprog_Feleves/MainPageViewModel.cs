@@ -15,11 +15,12 @@ namespace QQWRFO_Mobilprog_Feleves
         }
         private async Task PerformLoginAsync()
         {
+            await Shell.Current.GoToAsync("GamePage");
             bool loginSuccessful = await AuthenticateUserAsync();
 
             if (loginSuccessful)
             {
-                
+                await Shell.Current.GoToAsync("GamePage");
             }
             else
             {

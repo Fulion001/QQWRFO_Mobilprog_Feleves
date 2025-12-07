@@ -1,55 +1,79 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:QQWRFO_Mobilprog_Feleves"
              x:Class="QQWRFO_Mobilprog_Feleves.GamePage"
-             Title="GamePage">
-    <VerticalStackLayout>
-        <Grid RowSpacing="20" Padding="30">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" ColumnSpacing="20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button Text="Choose a picture" Grid.Column="0"/>
-                <Button Text="Choose a picture" Grid.Column="1"/>
-            </Grid>
-            <CollectionView x:Name="PuzzleBoard"
-                    ItemsSource="{Binding PuzzlePieces}"
-                    SelectionMode="None" Grid.Row="2">
+             Title="Tili-Toli Játék">
 
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="3" />
-                </CollectionView.ItemsLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="1">
-                            <Image Source="{Binding Image}" 
-                           Aspect="AspectFill"
-                           HeightRequest="100" 
-                           WidthRequest="100">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnPieceTapped" 
-                                                  CommandParameter="{Binding .}"/>
-                                </Image.GestureRecognizers>
-                            </Image>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <Grid Grid.Row="1" ColumnSpacing="20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button Text="Roll" Grid.Column="0" Clicked="OnStartGameClicked"/>
-                <Button Text="Users board" Grid.Column="1" Clicked="OnStartGameClicked"/>
-            </Grid>
+    <ContentPage.BindingContext>
+        <vm:GameViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="Auto, Auto, *" 
+          RowSpacing="10" 
+          Padding="20">
+
+        <Grid Grid.Row="0" ColumnDefinitions="*, *" ColumnSpacing="15">
+            <Button Grid.Column="0" 
+                    Text="Galéria" 
+                    Command="{Binding PickImageCommand}"/>
+            <Button Grid.Column="1" 
+                    Text="Kamera" 
+                    Command="{Binding TakePhotoCommand}"/>
         </Grid>
-    </VerticalStackLayout>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*, *" ColumnSpacing="15">
+            <Button Grid.Column="0" 
+                    Text="Keverés (Roll)" 
+                    BackgroundColor="Orange"
+                    Command="{Binding ShuffleCommand}"/>
+            <Button Grid.Column="1" 
+                    Text="Eredeti kép" 
+                    Command="{Binding ShowOriginalCommand}"/>
+        </Grid>
+
+        <CollectionView x:Name="PuzzleBoard"
+                        Grid.Row="2"
+                        ItemsSource="{Binding PuzzlePieces}"
+                        SelectionMode="None"
+                        Margin="0,20,0,0">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" 
+                                 Span="3" 
+                                 HorizontalItemSpacing="2" 
+                                 VerticalItemSpacing="2"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="0">
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GameViewModel}}, Path=MoveTileCommand}"
+                                CommandParameter="{Binding .}" />
+                        </Grid.GestureRecognizers>
+
+                        <Image Source="{Binding Image}" 
+                               Aspect="AspectFill"
+                               HeightRequest="100" 
+                               WidthRequest="100"
+                               Opacity="{Binding IsEmpty, Converter={StaticResource BoolToOpacityConverter}}">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image" Binding="{Binding IsEmpty}" Value="True">
+                                    <Setter Property="Opacity" Value="0" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

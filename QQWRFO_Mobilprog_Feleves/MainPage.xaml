@@ -1,32 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="QQWRFO_Mobilprog_Feleves.MainPage">
+             xmlns:local="clr-namespace:QQWRFO_Mobilprog_Feleves"
+             x:Class="QQWRFO_Mobilprog_Feleves.MainPage"
+             Title="Bejelentkezés">
+
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
 
     <ScrollView>
-        <VerticalStackLayout>
-        <Grid RowSpacing="20" Padding="30">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Text="Username" FontSize="32" HorizontalOptions="Center" Grid.Row="0"/>
-            <Entry Grid.Row="1"/>
-            <Label Text="Password" FontSize="32" HorizontalOptions="Center" Grid.Row="2"/>
-            <Entry Grid.Row="3"/>
-            <Grid Grid.Row="4" ColumnSpacing="20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                    <Button Text="Login" Grid.Column="0" />
-                <Button Text="Register" Grid.Column="1"/>
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand">
+
+            <Label Text="Tili-Toli Játék" FontSize="40" 
+                   FontAttributes="Bold" HorizontalOptions="Center" 
+                   Margin="0, 0, 0, 20"/>
+
+            <Label Text="Felhasználónév" FontSize="18" FontAttributes="Bold"/>
+            <Entry Placeholder="Írja be a felhasználónevet" 
+                   Text="{Binding Username}" 
+                   Keyboard="Text"/>
+
+            <Label Text="Jelszó" FontSize="18" FontAttributes="Bold"/>
+            <Entry Placeholder="Írja be a jelszót" 
+                   Text="{Binding Password}" 
+                   IsPassword="True" 
+                   Keyboard="Text"/>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Margin="0, 20, 0, 0">
+
+                <Button Text="Bejelentkezés" 
+                        Command="{Binding LoginCommand}"
+                        Grid.Column="0" />
+
+                <Button Text="Regisztráció" 
+                        Command="{Binding RegisterCommand}"
+                        BackgroundColor="DarkGray"
+                        Grid.Column="1"/>
             </Grid>
-        </Grid>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

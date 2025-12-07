@@ -4,9 +4,52 @@
              x:Class="QQWRFO_Mobilprog_Feleves.GamePage"
              Title="GamePage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Grid RowSpacing="20" Padding="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Choose a picture" Grid.Column="0"/>
+                <Button Text="Choose a picture" Grid.Column="1"/>
+            </Grid>
+            <CollectionView x:Name="PuzzleBoard"
+                    ItemsSource="{Binding PuzzlePieces}"
+                    SelectionMode="None" Grid.Row="2">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="3" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="1">
+                            <Image Source="{Binding Image}" 
+                           Aspect="AspectFill"
+                           HeightRequest="100" 
+                           WidthRequest="100">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnPieceTapped" 
+                                                  CommandParameter="{Binding .}"/>
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Grid Grid.Row="1" ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Text="Roll" Grid.Column="0" Clicked="OnStartGameClicked"/>
+                <Button Text="Users board" Grid.Column="1" Clicked="OnStartGameClicked"/>
+            </Grid>
+        </Grid>
     </VerticalStackLayout>
 </ContentPage>

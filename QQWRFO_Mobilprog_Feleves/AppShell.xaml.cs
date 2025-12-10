@@ -7,7 +7,7 @@
             InitializeComponent();
             Routing.RegisterRoute("GamePage", typeof(GamePage));
             Routing.RegisterRoute("RegisterPage", typeof(RegisterPage));
-            Routing.RegisterRoute("MainPage", typeof(MainPage));
+            Routing.RegisterRoute("BackToMainPage", typeof(MainPage));
         }
     }
 }

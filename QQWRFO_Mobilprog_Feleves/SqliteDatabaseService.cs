@@ -37,8 +37,33 @@ namespace QQWRFO_Mobilprog_Feleves
             await _database.CreateTableAsync<User>();
         }
 
+        public Task<List<User>> GetUsersAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> GetUserAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CreateUserAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateUserAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteUserAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         // --- CRUD Műveletek ---
 
-        
+
     }
 }

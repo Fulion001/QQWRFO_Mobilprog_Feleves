@@ -5,13 +5,7 @@ using SQLite;
 
 namespace QQWRFO_Mobilprog_Feleves
 {
-    public interface IDatabaseService
-    {
-        Task<int> SaveUserAsync(User user);
-        Task<User> GetUserAsync(string username);
-        Task<List<User>> GetUsersAsync();
-        Task<int> DeleteUserAsync(User user);
-    }
+    
     public class User
     {
         [PrimaryKey, AutoIncrement]
@@ -20,8 +14,7 @@ namespace QQWRFO_Mobilprog_Feleves
         [MaxLength(250), Unique]
         public string Username { get; set; }
 
-        public string HashedPassword { get; set; }
+        public string Password { get; set; }
 
-        public DateTime RegistrationDate { get; set; } = DateTime.Now;
     }
 }

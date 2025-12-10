@@ -5,6 +5,14 @@ using System.Text;
 
 namespace QQWRFO_Mobilprog_Feleves
 {
+    public interface IDatabaseService
+    {
+        Task<List<User>> GetUsersAsync();
+        Task<User> GetUserAsync(int id);
+        Task CreateUserAsync(User user);
+        Task UpdateUserAsync(User user);
+        Task DeleteUserAsync(User user);
+    }
     public class SqliteDatabaseService : IDatabaseService
     {
         // SQLite kapcsolat objektum
@@ -31,38 +39,6 @@ namespace QQWRFO_Mobilprog_Feleves
 
         // --- CRUD Műveletek ---
 
-        public Task<int> SaveUserAsync(User user)
-        {
-            if (user.Id != 0)
-            {
-                // Update
-                return _database.UpdateAsync(user);
-            }
-            else
-            {
-                // Insert
-                return _database.InsertAsync(user);
-            }
-        }
-
-        public Task<User> GetUserAsync(string username)
-        {
-            // Lekérdezés a felhasználónév alapján
-            return _database.Table<User>()
-                            .Where(u => u.Username == username)
-                            .FirstOrDefaultAsync();
-        }
-
-        public Task<List<User>> GetUsersAsync()
-        {
-            // Összes felhasználó lekérdezése
-            return _database.Table<User>().ToListAsync();
-        }
-
-        public Task<int> DeleteUserAsync(User user)
-        {
-            // Felhasználó törlése az Id alapján
-            return _database.DeleteAsync(user);
-        }
+        
     }
 }

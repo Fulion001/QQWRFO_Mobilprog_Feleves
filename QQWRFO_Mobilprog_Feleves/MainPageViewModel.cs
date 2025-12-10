@@ -16,17 +16,22 @@ namespace QQWRFO_Mobilprog_Feleves
         public async Task LoginAsync()
         {
             await Shell.Current.GoToAsync("GamePage");
-            //bool loginSuccessful = await AuthenticateUserAsync();
+            bool loginSuccessful = await AuthenticateUserAsync();
 
-            //if (loginSuccessful)
-            //{
-            //    await Shell.Current.GoToAsync("GamePage");
-            //}
-            //else
-            //{
-            //    // Hiba kezelése (pl. hibaüzenet megjelenítése)
-            //    await Shell.Current.DisplayAlert("Hiba", "Helytelen felhasználónév vagy jelszó.", "OK");
-            //}
+            if (loginSuccessful)
+            {
+                await Shell.Current.GoToAsync("GamePage");
+            }
+            else
+            {
+                // Hiba kezelése (pl. hibaüzenet megjelenítése)
+                await Shell.Current.DisplayAlert("Hiba", "Helytelen felhasználónév vagy jelszó.", "OK");
+            }
+        }
+        [RelayCommand]
+        public async Task RegisterAsync()
+        {             
+            await Shell.Current.GoToAsync("RegisterPage");
         }
 
         private Task<bool> AuthenticateUserAsync()

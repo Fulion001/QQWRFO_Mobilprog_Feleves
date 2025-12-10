@@ -6,6 +6,7 @@
         {
             InitializeComponent();
             Routing.RegisterRoute("GamePage", typeof(GamePage));
+            Routing.RegisterRoute("RegisterPage", typeof(RegisterPage));
         }
     }
 }
